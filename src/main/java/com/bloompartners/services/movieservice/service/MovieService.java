@@ -1,6 +1,7 @@
 package com.bloompartners.services.movieservice.service;
 
-import org.springframework.stereotype.Service;
+import com.bloompartners.services.movieservice.document.Movie;
+import reactor.core.publisher.Mono;
 
 /**
  * @author melyas
@@ -8,4 +9,7 @@ import org.springframework.stereotype.Service;
 public interface MovieService {
 
 
+    Mono<Movie> saveMovie(Movie movie);
+
+    Mono<Movie> loadMovieById(String s);
 }
