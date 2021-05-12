@@ -1,5 +1,7 @@
 package com.bloompartners.services.movieservice.document;
 
+import com.bloompartners.services.movieservice.model.Genre;
+import com.bloompartners.services.movieservice.model.Rate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,9 +21,11 @@ public class Movie {
 
     @Id
     private String id;
+    private Long version;
     private String name;
     private Integer releaseYear;
     private Long duration;
+    private List<Actor> actors;
     private String thumbnailUrl;
     private String language;
     private String country;

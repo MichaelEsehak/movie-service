@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Actor {
+public class ActorModel {
 
     @JsonProperty("id")
     private String id;

@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * @author melyas
@@ -27,6 +28,12 @@ public class MovieModel {
     @JsonProperty("duration")
     private Long duration;
 
+    @JsonProperty("version")
+    private Long version;
+
+    @JsonProperty("actors")
+    private List<ActorModel> actorsModel;
+
     @JsonProperty("thumbnailUrl")
     private String thumbnailUrl;
 
@@ -41,8 +48,4 @@ public class MovieModel {
 
     @JsonProperty("genres")
     private List<Genre> genres;
-
-
-
-
 }
