@@ -22,10 +22,15 @@ public class MovieController {
     MovieService movieService;
 
     @PostMapping("/update")
-    ResponseEntity<Mono<MovieModel>> createUpdateMovie(@RequestBody MovieModel movieModel) {
-        return ResponseEntity.status(HttpStatus.CREATED)
-            .body(movieService.saveOrUpdate(movieModel));
+    ResponseEntity<Mono<MovieModel>> updateMovie(@RequestBody MovieModel movieModel) {
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(movieService.updateMovie(movieModel));
+    }
 
+    @PostMapping("/create")
+    ResponseEntity<Mono<MovieModel>> createMovie(@RequestBody MovieModel movieModel) {
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(movieService.createMovie(movieModel));
     }
 
     @GetMapping("/id/{id}")

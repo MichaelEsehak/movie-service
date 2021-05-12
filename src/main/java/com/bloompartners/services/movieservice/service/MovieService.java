@@ -12,7 +12,9 @@ public interface MovieService {
 
     Mono<MovieModel> loadMovieById(String s);
 
-    Mono<MovieModel> saveOrUpdate(MovieModel movieModel);
+    Mono<MovieModel> updateMovie(MovieModel movieModel);
+
+    Mono<MovieModel> createMovie(MovieModel movieModel);
 
     Mono<Void> deleteById(String id);
 }

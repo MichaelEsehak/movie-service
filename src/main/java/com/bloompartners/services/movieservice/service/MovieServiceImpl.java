@@ -4,6 +4,7 @@ import static java.lang.String.format;
 
 import com.bloompartners.services.movieservice.converter.MovieConverter;
 import com.bloompartners.services.movieservice.document.Movie;
+import com.bloompartners.services.movieservice.exception.MovieAlreadyExistsException;
 import com.bloompartners.services.movieservice.exception.MovieNotFoundException;
 import com.bloompartners.services.movieservice.model.MovieModel;
 import com.bloompartners.services.movieservice.repository.MovieRepository;
@@ -36,7 +37,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Mono<MovieModel> saveOrUpdate(MovieModel movieModel) {
+    public Mono<MovieModel> updateMovie(MovieModel movieModel) {
         Movie movie = movieConverter.convertToMovie(movieModel);
 
         return movieRepository.findById(movie.getId())
@@ -50,10 +51,34 @@ public class MovieServiceImpl implements MovieService {
                 return movieRepository.save(movie);
             })
             .switchIfEmpty(
-                Mono.defer(() -> movieRepository.save(movie)))
+                Mono.defer(() -> Mono.error(new MovieNotFoundException(
+                    String.format("Movie with id %s doesn't exists", movie.getId())))))
             .doOnNext(movieEntity -> log
                 .info("Movie with Id: {} processed Successfully", movieEntity.getId()))
             .map(movieConverter::convertToMovieModel);
+    }
+
+    @Override
+    public Mono<MovieModel> createMovie(MovieModel movieModel) {
+        Movie movie = movieConverter.convertToMovie(movieModel);
+
+        return movieRepository.findById(movie.getId())
+            .flatMap(existingDocument -> {
+                if (!existingDocument.getId().equals(movie.getId())) {
+                    return Mono.error(new MovieAlreadyExistsException(
+                        format("Movie with Id %s already exists",
+                            movie.getId())
+                    ));
+                }
+                return movieRepository.save(movie);
+            })
+            .switchIfEmpty(
+                Mono.defer(
+                    () -> movieRepository.save(movie)))
+            .doOnNext(movieEntity -> log
+                .info("Movie with Id: {} processed Successfully", movieEntity.getId()))
+            .map(movieConverter::convertToMovieModel);
+
     }
 
     @Override

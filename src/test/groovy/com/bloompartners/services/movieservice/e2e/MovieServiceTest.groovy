@@ -18,7 +18,7 @@ class MovieServiceTest extends E2ESpecification{
         given: "a movie"
         def movie=createNewMovie("TEEST1","movie name")
         when: "save movie is called"
-        movieService.saveOrUpdate(movieConverter.convertToMovieModel(movie)).block()
+        movieService.createMovie(movieConverter.convertToMovieModel(movie)).block()
 
         and: "movie is retrieved back"
         def dbMovie=movieService.loadMovieById(movie.getId()).blockOptional()

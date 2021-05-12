@@ -29,7 +29,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MovieNotFoundException.class)
     public ResponseEntity<Object> handleMovieNotFoundException(MovieNotFoundException exception) {
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON).body(new ErrorResponse(
+            Instant.now(),HttpStatus.NOT_FOUND.value(),exception.getMessage()));
     }
 
 }
