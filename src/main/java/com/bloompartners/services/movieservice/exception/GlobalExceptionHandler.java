@@ -32,5 +32,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON).body(new ErrorResponse(
             Instant.now(),HttpStatus.NOT_FOUND.value(),exception.getMessage()));
     }
+    @ExceptionHandler(MovieAlreadyExistsException.class)
+    public ResponseEntity<Object> handleMovieAlreadyExistsException(MovieAlreadyExistsException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).contentType(MediaType.APPLICATION_JSON).body(new ErrorResponse(
+            Instant.now(),HttpStatus.NOT_ACCEPTABLE.value(),exception.getMessage()));
+    }
 
 }

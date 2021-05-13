@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -22,8 +23,11 @@ public class Movie {
     @Id
     private String id;
     private Long version;
+    @Indexed
     private String name;
+    @Indexed
     private Integer releaseYear;
+    @Indexed
     private Long duration;
     private List<Actor> actors;
     private String thumbnailUrl;
@@ -31,8 +35,6 @@ public class Movie {
     private String country;
     private Rate rate;
     private List<Genre> genres;
-
-
 
 
 }

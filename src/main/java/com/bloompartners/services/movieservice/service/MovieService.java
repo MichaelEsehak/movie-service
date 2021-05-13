@@ -1,7 +1,7 @@
 package com.bloompartners.services.movieservice.service;
 
-import com.bloompartners.services.movieservice.document.Movie;
 import com.bloompartners.services.movieservice.model.MovieModel;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -17,4 +17,9 @@ public interface MovieService {
     Mono<MovieModel> createMovie(MovieModel movieModel);
 
     Mono<Void> deleteById(String id);
+
+    Flux<MovieModel> loadAllMovies(Long offset, Long limit);
+
+    Flux<MovieModel> loadMoviesByAttributes(String name, Long duration,
+        Integer releaseYear, Long offset, Long limit);
 }

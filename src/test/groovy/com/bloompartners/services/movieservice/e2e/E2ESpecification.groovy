@@ -24,10 +24,12 @@ class E2ESpecification extends Specification{
     @Autowired
     MovieService movieService
 
-    protected Movie createNewMovie(String id,String name){
+    protected Movie createNewMovie(String id,String name,version =1 ){
         Movie movie =new Movie()
         movie.setId(id);
         movie.setName(name)
+        movie.setVersion(version)
+
         return movie;
 
     }
