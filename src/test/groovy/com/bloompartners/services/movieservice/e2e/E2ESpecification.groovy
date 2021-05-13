@@ -2,6 +2,7 @@ package com.bloompartners.services.movieservice.e2e
 
 import com.bloompartners.services.movieservice.MovieServiceApplication
 import com.bloompartners.services.movieservice.document.Movie
+import com.bloompartners.services.movieservice.model.MovieModel
 import com.bloompartners.services.movieservice.service.MovieService
 import groovyx.net.http.RESTClient
 import groovyx.net.http.Status
@@ -26,11 +27,20 @@ class E2ESpecification extends Specification{
 
     protected Movie createNewMovie(String id,String name,version =1 ){
         Movie movie =new Movie()
-        movie.setId(id);
+        movie.setId(id)
         movie.setName(name)
         movie.setVersion(version)
 
         return movie;
+
+    }
+
+    protected MovieModel createMovieModel(String id, String name, version =1 ){
+        MovieModel movieModel =new MovieModel()
+        movieModel.setId(id)
+        movieModel.setName(name)
+        movieModel.setVersion(version)
+        return movieModel;
 
     }
 
