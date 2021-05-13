@@ -14,35 +14,19 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
+
 /**
  * @author melyas
  */
 
-@ContextConfiguration(loader = SpringBootContextLoader.class,classes = [E2EConfiguration.class])
+@ContextConfiguration(loader = SpringBootContextLoader.class, classes = [E2EConfiguration.class])
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-class E2ESpecification extends Specification{
+class E2ESpecification extends Specification {
 
     @Autowired
     MovieService movieService
 
-    protected Movie createNewMovie(String id,String name,version =1 ){
-        Movie movie =new Movie()
-        movie.setId(id)
-        movie.setName(name)
-        movie.setVersion(version)
 
-        return movie;
-
-    }
-
-    protected MovieModel createMovieModel(String id, String name, version =1 ){
-        MovieModel movieModel =new MovieModel()
-        movieModel.setId(id)
-        movieModel.setName(name)
-        movieModel.setVersion(version)
-        return movieModel;
-
-    }
 
     @Configuration
     @Import(MovieServiceApplication.class)

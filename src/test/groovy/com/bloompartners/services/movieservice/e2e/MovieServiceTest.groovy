@@ -7,6 +7,8 @@ import com.bloompartners.services.movieservice.service.MovieService
 import org.springframework.beans.factory.annotation.Autowired
 import reactor.test.StepVerifier
 
+import static com.bloompartners.services.movieservice.TestUtils.createNewMovie
+
 /**
  * @author melyas
  */

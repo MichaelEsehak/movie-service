@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 
+import static com.bloompartners.services.movieservice.TestUtils.createMovieModel
+import static com.bloompartners.services.movieservice.TestUtils.createNewMovie
+
 /**
  * @author melyas
  */
@@ -72,7 +75,7 @@ class MovieControllerTest extends E2ESpecification {
         def movie = createMovieModel(movieId, "test movie")
 
         and: "200 should be expected with movieModel with version =1"
-        def result =webTestClient.post()
+        def result = webTestClient.post()
                 .uri("/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(movie)
@@ -81,8 +84,8 @@ class MovieControllerTest extends E2ESpecification {
                 .expectBody(MovieModel)
                 .returnResult()
         then:
-        result.responseBody.getId()==movieId
-        result.responseBody.getVersion()==movie.getVersion()
+        result.responseBody.getId() == movieId
+        result.responseBody.getVersion() == movie.getVersion()
 
 
     }
@@ -123,7 +126,7 @@ class MovieControllerTest extends E2ESpecification {
         movieService.createMovie(movieModel).block()
 
         then: "200 should returned with movie version increased"
-        def result =webTestClient.post()
+        def result = webTestClient.post()
                 .uri("/update")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(movieModel)
@@ -132,8 +135,8 @@ class MovieControllerTest extends E2ESpecification {
                 .expectBody(MovieModel)
                 .returnResult()
         then:
-        result.responseBody.getId()==movieId
-        result.responseBody.getVersion()==movieModel.getVersion()+1
+        result.responseBody.getId() == movieId
+        result.responseBody.getVersion() == movieModel.getVersion() + 1
     }
 
     def "When a movie is IN db, update endpoint should not work if version doesn't match"() {
